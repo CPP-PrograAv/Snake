@@ -1,6 +1,5 @@
 package base;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,19 +7,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class Escenario extends JFrame{
 	
 
 	public static final int ANCHO = 400;
 	public static final int LARGO = 400;
-	private JPanel contentPane;
 	
 	//snake
 	private int size = 20;
-	Snake snake = new Snake(size);
+	Snake snake = new Snake(size,50,50,6);
 	
 	//movimientos
 	int dy,dx;
@@ -28,48 +24,46 @@ public class Escenario extends JFrame{
 	
 	public Escenario() {
 		
-		super("Game");
+		super("Juego");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,ANCHO,LARGO);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(0,0,0,0)); //no se para q es esto..
-		contentPane.setLayout(new BorderLayout(0,0)); // no se para que es esto
-		setContentPane(contentPane);
+
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
+		setBackground(Color.WHITE);
 		//CLASE ANONIMA, MANEJO EVENTOS DE TECLADO
-				addKeyListener(new KeyListener() {
-					
-					@Override
-					public void keyTyped(KeyEvent e) {
-					}
-					
-					@Override
-					public void keyReleased(KeyEvent e) {
-						if(e.getKeyCode() == KeyEvent.VK_LEFT) left =false;
-						if(e.getKeyCode() == KeyEvent.VK_RIGHT) right = false;
-						if(e.getKeyCode() == KeyEvent.VK_UP) up = false;
-						if(e.getKeyCode() == KeyEvent.VK_DOWN) down =false;
-					}
-					
-					@Override
-					public void keyPressed(KeyEvent e) {
-					
-						if(e.getKeyCode() == KeyEvent.VK_LEFT) left =true;
-						if(e.getKeyCode() == KeyEvent.VK_RIGHT) right = true;
-						if(e.getKeyCode() == KeyEvent.VK_UP) up = true;
-						if(e.getKeyCode() == KeyEvent.VK_DOWN) down = true;
+		addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_LEFT) left =false;
+				if(e.getKeyCode() == KeyEvent.VK_RIGHT) right = false;
+				if(e.getKeyCode() == KeyEvent.VK_UP) up = false;
+				if(e.getKeyCode() == KeyEvent.VK_DOWN) down =false;
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+			
+				if(e.getKeyCode() == KeyEvent.VK_LEFT) left =true;
+				if(e.getKeyCode() == KeyEvent.VK_RIGHT) right = true;
+				if(e.getKeyCode() == KeyEvent.VK_UP) up = true;
+				if(e.getKeyCode() == KeyEvent.VK_DOWN) down = true;
 
-					}
-				});
+			}
+		});
 		
 	}
 	
 	public void start() {
 		while (true) {
 			move(); //la muevo
-			repaint(); //re pinto la snake
+			//repaint(); //re pinto la snake
+			paint(this.getGraphics());
 			
 			try {
 				Thread.sleep(100); //HAGO QUE LOS PROCESOS SE EJECUTEN CADA 100 MILISEGUNDOS
@@ -78,7 +72,13 @@ public class Escenario extends JFrame{
 			}
 		}
 	}
-
+	@Override
+	public void update(Graphics g) {
+		// TODO Auto-generated method stub
+		super.update(g);
+		paint(g);
+	}
+	
 	public void paint(Graphics g) {
 		super.paint(g); //VUELVO A PINTAR, Y BORRO EL ANTERIOR
 		Graphics2D g2d = (Graphics2D) g;
@@ -88,7 +88,6 @@ public class Escenario extends JFrame{
 	}
 	
 	private void move() {
-		
 		if(up && dy==0) { //LA SEGUNDA PREGUNTA ES PARA EVITAR QUE VUELVA PARA ATRAS, LA CABEZA DEBERIA MOVERSE PARA CUALQUIER LADO?
 			dy=-size;
 			dx=0;
@@ -115,7 +114,6 @@ public class Escenario extends JFrame{
 		if(snake.getPosy()<0) snake.setPosy(LARGO);
 		if(snake.getPosx()>ANCHO) snake.setPosx(0);
 		if(snake.getPosy()>LARGO) snake.setPosy(0);
-		
 	}
 	
 	
