@@ -21,7 +21,7 @@ public class Snake extends JPanel{
 		this.size = size;
 		cuerpo = new ArrayList<Cuerpo>();
 		for(int i = 0;i<2;i++)
-			cuerpo.add(new Cuerpo(0,0+i));
+			cuerpo.add(new Cuerpo(0-i*size,0));
 	}
 	
 	public Snake(int size, int posX, int posY) {
@@ -30,7 +30,7 @@ public class Snake extends JPanel{
 		this.posy = posY;
 		cuerpo = new ArrayList<Cuerpo>();
 		for(int i = 0;i<2;i++)
-			cuerpo.add(new Cuerpo(posX,posY+i));
+			cuerpo.add(new Cuerpo(posX-i*size,posY));
 	}
 	public Snake(int size, int posX, int posY,int longitud) {
 		this.size = size;
@@ -38,7 +38,7 @@ public class Snake extends JPanel{
 		this.posy = posY;
 		cuerpo = new ArrayList<Cuerpo>();
 		for(int i = 0;i<longitud;i++)
-			cuerpo.add(new Cuerpo(posX,posY+i*size));
+			cuerpo.add(new Cuerpo(posX-i*size,posY));
 		
 	}
 
@@ -50,12 +50,19 @@ public class Snake extends JPanel{
 	}
 
 	public void move(int dx, int dy) {
+		int i = -1;
+		if(cuerpo != null) {
+			i = cuerpo.size()-1;
+			while(i > 0) {
+				cuerpo.get(i).setPosition(cuerpo.get(i-1).getPosX(), cuerpo.get(i-1).getPosY());
+				i--;
+			}
+			if(i==0)
+				cuerpo.get(i).setPosition(posx, posy);
+		}
 		this.posx += dx;
 		this.posy += dy;
-		for (int i = cuerpo.size() - 1; i > 0; i--) {
 
-			cuerpo.get(i).setPosition(cuerpo.get(i-1).getPosX(), cuerpo.get(i-1).getPosY());
-		}
 	}	
 	
 	public void setUbicacion(int dx,int dy) {
