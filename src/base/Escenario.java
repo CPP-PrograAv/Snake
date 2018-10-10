@@ -63,7 +63,7 @@ public class Escenario extends JFrame{
 		while (true) {
 			move(); //la muevo
 			//repaint(); //re pinto la snake
-			paint(this.getGraphics());
+			update(this.getGraphics());
 			
 			try {
 				Thread.sleep(100); //HAGO QUE LOS PROCESOS SE EJECUTEN CADA 100 MILISEGUNDOS

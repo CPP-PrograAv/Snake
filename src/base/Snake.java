@@ -50,12 +50,13 @@ public class Snake extends JPanel{
 	}
 
 	public void move(int dx, int dy) {
-		this.posx+=dx;
-		this.posy+=dy;
-		for(Cuerpo trozo :cuerpo) {
-			trozo.mover(dx,dy);
+		this.posx += dx;
+		this.posy += dy;
+		for (int i = cuerpo.size() - 1; i > 0; i--) {
+
+			cuerpo.get(i).setPosition(cuerpo.get(i-1).getPosX(), cuerpo.get(i-1).getPosY());
 		}
-	}		
+	}	
 	
 	public void setUbicacion(int dx,int dy) {
 		this.posx =dx;

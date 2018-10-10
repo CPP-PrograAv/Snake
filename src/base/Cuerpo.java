@@ -11,12 +11,24 @@ public class Cuerpo {
 		this.posy = posY;
 	}
 	
-	public void mover(int dx, int dy) {
-		this.posx+=dx;
-		this.posy+=dy;
+	public void mover(int i, int dx,int dy) {
+		posx = dx;
+		posy = dy;
 	}
 	
 	public void paint(Graphics2D g2d) {
 		g2d.fillRect(posx, posy, 20, 20);
+	}
+	
+	public void setPosition(int posx, int posy) {
+		this.posx = posx;
+		this.posy = posy;
+	}
+	
+	public int getPosX() {
+		return posx;
+	}
+	public int getPosY() {
+		return posy;
 	}
 }
