@@ -6,7 +6,13 @@ public class Item extends GameObject{
 
 	
 	public Item(int s) {
-		super(s,50,50);	
+		super(s,(int) (Math.random() * (Escenario.ANCHO -s )) ,(int) (Math.random() * (Escenario.LARGO -s )));	
+	}
+	
+	
+	public void setItem(int dx, int dy) {
+		setPosX(dx);
+		setPosY(dy);
 	}
 	
 	public void setItem() {
@@ -23,6 +29,11 @@ public class Item extends GameObject{
 	public void move(int dx, int dy) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public boolean esConsumido(Snake snake) {
+		return	this.esColicionado(snake);
 	}
 	
 	

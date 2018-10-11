@@ -24,6 +24,7 @@ public abstract class GameObject {
 	}
 
 
+
 	public int getSize() {
 		return size;
 	}

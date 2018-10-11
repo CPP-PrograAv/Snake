@@ -4,6 +4,7 @@ package base;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RadialGradientPaint;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -17,7 +18,7 @@ public class Escenario extends JFrame{
 	
 	//snake
 	private int size = 20;
-	Snake snake = new Snake(size,50,50);
+	Snake snake = new Snake(size,70,70);
 	Item item = new Item(size);
 	//movimientos
 	int dy,dx;
@@ -106,14 +107,18 @@ public class Escenario extends JFrame{
 			dx=size;
 			dy=0;
 		}
-			
+		
 		snake.move(dx,dy);
 		
-		if(item.esColicionado(snake)) {
-			item.setItem();	
+		if(item.esConsumido(snake)) {
+			item.setItem();
 			snake.crecer();
 		}
 		
+		if(snake.coliciona()) {
+			System.out.println("Muerto");
+		}
+							
 		//PASAR LOS LIMITES
 		if(snake.getPosX()<0) snake.setPosX(ANCHO);
 		if(snake.getPosY()<0) snake.setPosY(LARGO);
