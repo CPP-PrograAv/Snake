@@ -10,13 +10,12 @@ import javax.swing.JFrame;
 
 public class Escenario extends JFrame{
 	
-
 	public static final int ANCHO = 400;
 	public static final int LARGO = 400;
 	
 	//snake
-	private int size = 20;
-	Snake snake = new Snake(size,50,50,6);
+	private int size = 10; // el tamaño de la snake en el escenario?
+	Snake snake = new Snake(size,size*2,size*2,4);
 	
 	//movimientos
 	int dy,dx;
@@ -27,7 +26,7 @@ public class Escenario extends JFrame{
 		super("Juego");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,ANCHO,LARGO);
-
+		
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setBackground(Color.WHITE);
@@ -74,7 +73,6 @@ public class Escenario extends JFrame{
 	}
 	@Override
 	public void update(Graphics g) {
-		// TODO Auto-generated method stub
 		super.update(g);
 		paint(g);
 	}
@@ -110,10 +108,10 @@ public class Escenario extends JFrame{
 				
 		snake.move(dx,dy);
 		//PASAR LOS LIMITES
-		if(snake.getPosx()<0) snake.setPosx(ANCHO);
-		if(snake.getPosy()<0) snake.setPosy(LARGO);
-		if(snake.getPosx()>ANCHO) snake.setPosx(0);
-		if(snake.getPosy()>LARGO) snake.setPosy(0);
+		if(snake.getPosx()<0) snake.setPosx(ANCHO-10);
+		if(snake.getPosy()<0) snake.setPosy(LARGO-10);
+		if(snake.getPosx()>ANCHO-10) snake.setPosx(0);
+		if(snake.getPosy()>LARGO-10) snake.setPosy(0);
 	}
 	
 	

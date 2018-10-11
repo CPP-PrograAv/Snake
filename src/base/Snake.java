@@ -21,7 +21,7 @@ public class Snake extends JPanel{
 		this.size = size;
 		cuerpo = new ArrayList<Cuerpo>();
 		for(int i = 0;i<2;i++)
-			cuerpo.add(new Cuerpo(0-i*size,0));
+			cuerpo.add(new Cuerpo(size,0-i*size,0));
 	}
 	
 	public Snake(int size, int posX, int posY) {
@@ -30,7 +30,7 @@ public class Snake extends JPanel{
 		this.posy = posY;
 		cuerpo = new ArrayList<Cuerpo>();
 		for(int i = 0;i<2;i++)
-			cuerpo.add(new Cuerpo(posX-i*size,posY));
+			cuerpo.add(new Cuerpo(size,posX-i*size,posY));
 	}
 	public Snake(int size, int posX, int posY,int longitud) {
 		this.size = size;
@@ -38,7 +38,7 @@ public class Snake extends JPanel{
 		this.posy = posY;
 		cuerpo = new ArrayList<Cuerpo>();
 		for(int i = 0;i<longitud;i++)
-			cuerpo.add(new Cuerpo(posX-i*size,posY));
+			cuerpo.add(new Cuerpo(size,posX-i*size,posY));
 		
 	}
 
