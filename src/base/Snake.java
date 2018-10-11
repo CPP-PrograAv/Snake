@@ -1,53 +1,42 @@
 package base;
 
 import java.awt.Graphics2D;
-import javax.swing.JPanel;
+import java.util.ArrayList;
 
-public class Snake extends JPanel{
+public class Snake extends GameObject {
 	
-//	private int velx =4;
-//	private int vely =4;
-	private int size;
+//	private int vel = 1;
+	private ArrayList<Cuerpo> cuerpos = new ArrayList<Cuerpo>();
 	
-	private int posx=0;
-	private int posy=0;
-//	int xa=velx; //velocidad, utilizar mas adelante..
-//	int ya=vely;
-
-	public Snake(int size) {
-		this.size = size;
+	public Snake(int size, int posX, int posY) {
+		super(size, posX, posY);
+		cuerpos.add( new Cuerpo(posX-size,posY,size));
 	}
 
+	@Override
 	public void paint(Graphics2D g2d) {
-		g2d.fillRect(posx, posy, size, size);
+		g2d.fillRect(getPosX() + 1, getPosY() + 1 , getSize() - 1, getSize() - 1);
+		for(Cuerpo trozo :cuerpos) 
+			trozo.paint(g2d);
 	}
 
+	@Override
 	public void move(int dx, int dy) {
-		this.posx+=dx;
-		this.posy+=dy;
-	}		
-	
-	public void setUbicacion(int dx,int dy) {
-		this.posx =dx;
-		this.posy = dy;
-	}
 
-	public int getPosx() {
-		return posx;
-	}
+		for (int i = cuerpos.size() - 1; i > 0; i--)
+			cuerpos.get(i).setPosition(cuerpos.get(i - 1).getPosX(), cuerpos.get(i - 1).getPosY());
+		cuerpos.get(0).setPosition(getPosX(), getPosY());
 
-	public void setPosx(int posx) {
-		this.posx = posx;
-	}
-
-	public int getPosy() {
-		return posy;
-	}
-
-	public void setPosy(int posy) {
-		this.posy = posy;
+		setPosX(getPosX()+dx);
+		setPosY(getPosY()+dy);
 	}
 	
+	public void crecer() {
+//		cuerpos.add( new Cuerpo(-100,-100,getSize()) ); // hago que el cuerpo aparesca afuera de la ventana, pero al agregarlo a la lista
+														//el proximo move tendra en cuenta este ultimo elemento agregado	
+	}
+		
 	
 	
 }
+
