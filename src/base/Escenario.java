@@ -69,7 +69,6 @@ public class Escenario extends JFrame{
 //			System.out.println("\n\n");
 //
 //			snake.move(size,0); //la muevo
-			
 			move();
 			
 			update( this.getGraphics() );//re pinto la snake, preguntar por repaint();

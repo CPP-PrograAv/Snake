@@ -7,7 +7,7 @@ public abstract class GameObject {
 	
 	private int posX,posY;
 	private int size;
-
+	
 	
 	public GameObject(int s) {
 		this.size=s;
@@ -21,7 +21,6 @@ public abstract class GameObject {
 	}
 	
 	public abstract void paint(Graphics2D g2d);
-	
 	
 	public void setPosition(int posX, int posY) {
 		this.posX = posX;
