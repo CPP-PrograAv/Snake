@@ -5,25 +5,29 @@ import java.awt.Rectangle;
 
 public abstract class GameObject {
 	
-	
 	private int posX,posY;
 	private int size;
+
+	
+	public GameObject(int s) {
+		this.size=s;
+	}
 	
 	public GameObject(int s, int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
 		this.size = s;
+		Escenario.matriz[posY/size][posX/size] = 1;
 	}
 	
 	public abstract void paint(Graphics2D g2d);
-	public abstract void move(int dx, int dy);
+	
 	
 	public void setPosition(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
+		Escenario.matriz[this.posY/this.size][this.posX/this.size] = 1;
 	}
-
-
 
 	public int getSize() {
 		return size;
@@ -41,7 +45,6 @@ public abstract class GameObject {
 	public void setPosX(int posX) {
 		this.posX = posX;
 	}
-
 
 	public int getPosY() {
 		return posY;

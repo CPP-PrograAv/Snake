@@ -6,29 +6,26 @@ public class Item extends GameObject{
 
 	
 	public Item(int s) {
-		super(s,(int) (Math.random() * (Escenario.ANCHO -s )) ,(int) (Math.random() * (Escenario.LARGO -s )));	
+		super(s,120,80);	
 	}
 	
 	
 	public void setItem(int dx, int dy) {
-		setPosX(dx);
-		setPosY(dy);
+		setPosition(dx, dy);
 	}
 	
 	public void setItem() {
-		setPosX((int) (Math.random() * (Escenario.ANCHO - getSize() )) );
-		setPosY((int) (Math.random() * (Escenario.LARGO - getSize() )) );	
+		Escenario.matriz[getPosY()/getSize()][getPosX()/getSize()]=0;
+		int y = ((int)(Math.random()*(Escenario.ANCHO - getSize()))/getSize())*getSize();
+		int x = ((int)(Math.random()*(Escenario.LARGO - getSize()))/getSize())*getSize();
+		setPosition(x,y);
+		
+
 	}
 
 	@Override
 	public void paint(Graphics2D g2d) {
-		g2d.fillRect(getPosX()+1, getPosY()+1, getSize()-4, getSize()-4);
-	}
-
-	@Override
-	public void move(int dx, int dy) {
-		// TODO Auto-generated method stub
-		
+		g2d.fillRect(getPosX()+1, getPosY()+1, getSize()-2, getSize()-2);
 	}
 
 

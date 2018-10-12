@@ -6,7 +6,6 @@ public class MainJuego {
 		// TODO Auto-generated method stub
 		
 		new Escenario().start();
-		
 	
 	}
 

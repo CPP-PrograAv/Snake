@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.JFrame;
 
 
@@ -17,16 +16,20 @@ public class Escenario extends JFrame{
 	public static final int LARGO = 500;
 	
 	//snake
-	private int size = 20;
-	Snake snake = new Snake(size,70,70);
+	private static int size = 20;
+	Snake snake = new Snake(size,80,80);
 	Item item = new Item(size);
+	
+	public static int matriz[][] = new int[ANCHO/size][LARGO/size];
+	
 	//movimientos
 	int dy,dx;
 	boolean up,down,left,right;
 	
 	public Escenario() {
-		
+	
 		super("Game");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,ANCHO,LARGO);
 		setLocationRelativeTo(null);
@@ -49,7 +52,6 @@ public class Escenario extends JFrame{
 					
 					@Override
 					public void keyPressed(KeyEvent e) {
-					
 						if(e.getKeyCode() == KeyEvent.VK_LEFT) left =true;
 						if(e.getKeyCode() == KeyEvent.VK_RIGHT) right = true;
 						if(e.getKeyCode() == KeyEvent.VK_UP) up = true;
@@ -63,13 +65,28 @@ public class Escenario extends JFrame{
 	public void start() {
 		
 		while (true) {
-			move(); //la muevo
-			update(this.getGraphics());//re pinto la snake, preguntar por repaint();
+//			mostrarmatriz();
+//			System.out.println("\n\n");
+//
+//			snake.move(size,0); //la muevo
+			
+			move();
+			
+			update( this.getGraphics() );//re pinto la snake, preguntar por repaint();
 			try {
 				Thread.sleep(100); //HAGO QUE LOS PROCESOS SE EJECUTEN CADA 100 MILISEGUNDOS
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	private void mostrarmatriz() {
+		// TODO Auto-generated method stub
+		for(int i=0; i<ANCHO/size; i++) {
+			for(int j=0; j<ANCHO/size;j++) 
+				System.out.print(matriz[i][j]+" ");
+		System.out.println("\n");
 		}
 	}
 
@@ -110,7 +127,7 @@ public class Escenario extends JFrame{
 		
 		snake.move(dx,dy);
 		
-		if(item.esConsumido(snake)) {
+		if(item.esConsumido(snake) ) {
 			item.setItem();
 			snake.crecer();
 		}
@@ -120,10 +137,10 @@ public class Escenario extends JFrame{
 		}
 							
 		//PASAR LOS LIMITES
-		if(snake.getPosX()<0) snake.setPosX(ANCHO);
-		if(snake.getPosY()<0) snake.setPosY(LARGO);
-		if(snake.getPosX()>ANCHO) snake.setPosX(0);
-		if(snake.getPosY()>LARGO) snake.setPosY(0);
+		if(snake.getPosX()==20) snake.setPosX(ANCHO-40);
+		if(snake.getPosY()==20) snake.setPosY(LARGO-20);
+		if(snake.getPosX()==ANCHO-20) snake.setPosX(20);
+		if(snake.getPosY()==LARGO-20) snake.setPosY(40);
 		
 	}
 	
