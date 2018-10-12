@@ -12,19 +12,19 @@ import javax.swing.JFrame;
 
 public class Escenario extends JFrame{
 	
-	public static final int ANCHO = 500;
-	public static final int LARGO = 500;
+	public static final int ANCHO = 600;
+	public static final int LARGO = 600;
 	
 	//snake
 	private static int size = 20;
 	Snake snake = new Snake(size,80,80);
 	Item item = new Item(size);
-	
+	Snake snake2 = new Snake(size,200,200);
 	public static int matriz[][] = new int[ANCHO/size][LARGO/size];
 	
 	//movimientos
 	int dy,dx;
-	boolean up,down,left,right;
+	boolean up,down,left,right=true;
 	
 	public Escenario() {
 	
@@ -63,6 +63,9 @@ public class Escenario extends JFrame{
 	}
 	
 	public void start() {
+		System.out.println(snake.getIdSnake());
+		System.out.println(snake2.getIdSnake());
+		
 		
 		while (true) {
 //			mostrarmatriz();
@@ -100,6 +103,9 @@ public class Escenario extends JFrame{
 		g2d.setColor(Color.GREEN);
 		item.paint(g2d);
 		
+		g2d.setColor(Color.BLUE);
+		snake2.paint(g2d);
+		
 	}
 	
 	private void move() {
@@ -126,14 +132,16 @@ public class Escenario extends JFrame{
 		
 		snake.move(dx,dy);
 		
-		if(item.esConsumido(snake) ) {
+		if(snake.muerto) {
+			System.out.println("Muerto");
+		}
+		
+		if(item.esConsumido(snake)) {
 			item.setItem();
 			snake.crecer();
 		}
 		
-		if(snake.coliciona()) {
-			System.out.println("Muerto");
-		}
+	
 							
 		//PASAR LOS LIMITES
 		if(snake.getPosX()==20) snake.setPosX(ANCHO-40);

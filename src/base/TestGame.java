@@ -64,8 +64,7 @@ public class TestGame {
 	@Test
 	public void TestGiro180Grados() {
 		
-		
-		
+
 	}
 	
 	@Test

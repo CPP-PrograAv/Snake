@@ -7,25 +7,25 @@ public abstract class GameObject {
 	
 	private int posX,posY;
 	private int size;
-	
+	public static int idgeneral = 0;
 	
 	public GameObject(int s) {
 		this.size=s;
 	}
 	
-	public GameObject(int s, int posX, int posY) {
+	public GameObject(int s, int posX, int posY, int ID) {
 		this.posX = posX;
 		this.posY = posY;
 		this.size = s;
-		Escenario.matriz[posY/size][posX/size] = 1;
+		Escenario.matriz[posY/size][posX/size] = ID;
 	}
 	
 	public abstract void paint(Graphics2D g2d);
 	
-	public void setPosition(int posX, int posY) {
+	public void setPosition(int posX, int posY, int ID) {
 		this.posX = posX;
 		this.posY = posY;
-		Escenario.matriz[this.posY/this.size][this.posX/this.size] = 1;
+		Escenario.matriz[this.posY/this.size][this.posX/this.size] = ID;
 	}
 
 	public int getSize() {

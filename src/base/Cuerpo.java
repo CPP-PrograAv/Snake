@@ -9,8 +9,8 @@ public class Cuerpo extends GameObject{
 		super(size);
 	}
 	
-	public Cuerpo(int posX, int posY, int size) {
-		super(size, posX, posY);
+	public Cuerpo(int posX, int posY, int size,int id) {
+		super(size, posX, posY,id);
 	}
 
 	@Override
