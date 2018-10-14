@@ -16,7 +16,10 @@ public class Cuerpo extends GameObject{
 	@Override
 	public void paint(Graphics2D g2d) {
 		g2d.setColor(Color.BLACK);
-		g2d.fillRect(getPosX() + 1, getPosY() + 1, getSize() - 2, getSize() - 2);
+		int size = getSize();
+		int padding = Escenario.BORDE/2;
+
+		g2d.fillRect(getPosX()*size + 1+ padding, getPosY()*size + 1 + padding, size - 2, size - 2);
 	}
 	 
 }

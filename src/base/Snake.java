@@ -13,12 +13,14 @@ public class Snake extends GameObject {
 	
 	public Snake(int size, int posX, int posY) {
 		super(size, posX, posY, ID);
-		cuerpos.add( new Cuerpo(posX-size,posY,size,ID));
+		cuerpos.add( new Cuerpo(posX-1,posY,size,ID));
 	}
 
 	@Override
 	public void paint(Graphics2D g2d) {
-		g2d.fillRect(getPosX() + 1, getPosY() + 1 , getSize() - 2, getSize() - 2);
+		int size = getSize();
+		int padding = Escenario.BORDE/2;
+		g2d.fillRect(getPosX()*size + 1 + padding, getPosY()*size + 1 + padding , size - 2, size - 2);
 		for(Cuerpo trozo :cuerpos)
 			trozo.paint(g2d);
 	}
@@ -26,8 +28,8 @@ public class Snake extends GameObject {
 
 	public void move(int dx, int dy) {
 	
-		if(Escenario.matriz[(getPosY()+dy)/getSize()][(getPosX()+dx)/getSize()] != 0  &&
-			Escenario.matriz[(getPosY()+dy)/getSize()][(getPosX()+dx)/getSize()] != -1) {
+		if(Escenario.matriz[getPosX()+dy][getPosY()+dx] != 0  &&
+			Escenario.matriz[getPosX()+dy][getPosY()+dx] != -1) {
 			
 			this.muerto = true;
 			/*
@@ -40,8 +42,8 @@ public class Snake extends GameObject {
 		for (int i = cuerpos.size() - 1; i >=0; i--) { 
 	
 			if(i == cuerpos.size()-1 && !comer) 
-				Escenario.matriz[cuerpos.get(i).getPosY()/getSize()]
-								[cuerpos.get(i).getPosX()/getSize()] = 0;
+				Escenario.matriz[cuerpos.get(i).getPosX()]
+								[cuerpos.get(i).getPosY()] = 0;
 			
 			if(i>0) 
 				cuerpos.get(i).setPosition(cuerpos.get(i - 1).getPosX(), cuerpos.get(i - 1).getPosY(), ID);	
@@ -50,7 +52,7 @@ public class Snake extends GameObject {
 			comer=false;
 		}
 
-		setPosition(getPosX()+dx, getPosY()+dy, ID);	
+		setPosition(getPosX()+dx, getPosY()+dy, ID);
 	}
 	
 	public void crecer() {

@@ -7,8 +7,9 @@ public class Item extends GameObject{
 	public static int IdItem = -1;
 	
 	public Item(int size) {
-		super(size,	((int)(Math.random()*(Escenario.ANCHO - size))/size)*size,
-					((int)(Math.random()*(Escenario.LARGO - size))/size)*size, IdItem );	
+		super(size,(int)(Math.random()*(Escenario.ANCHO/Escenario.size - 1)),
+					(int)(Math.random()*(Escenario.LARGO/Escenario.size - 1)), IdItem );
+		System.out.println("Fruta en X: "+getPosX()+" e Y: "+getPosY());
 	}
 	
 	public void setItem(int dx, int dy) {
@@ -16,15 +17,20 @@ public class Item extends GameObject{
 	}
 	
 	public void setItem(){
-		Escenario.matriz[getPosY()/getSize()][getPosX()/getSize()]=0;
-		int y = ((int)(Math.random()*(Escenario.ANCHO - getSize()))/getSize())*getSize();
-		int x = ((int)(Math.random()*(Escenario.LARGO - getSize()))/getSize())*getSize();
+		Escenario.matriz[getPosX()][getPosY()]=0;
+		//Acá se debería verificar que no se superponga a la snake o a un powerup
+		int x = (int)(Math.random()*(Escenario.ANCHO/Escenario.size - 1));
+		int y = (int)(Math.random()*(Escenario.LARGO/Escenario.size - 1));
 		setPosition(x,y, IdItem);
+		System.out.println("Fruta en X: "+getPosX()+" e Y: "+getPosY());
 	}
 
 	@Override
 	public void paint(Graphics2D g2d) {
-		g2d.fillRect(getPosX()+1, getPosY()+1, getSize()-2, getSize()-2);
+		int size = getSize();
+		int padding = Escenario.BORDE/2;
+
+		g2d.fillRect(getPosX()*size + 1 + padding, getPosY()*size + 1 + padding, size-2, size-2);
 	}
 
 	public boolean esConsumido(Snake snake) {
