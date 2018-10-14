@@ -17,7 +17,7 @@ public abstract class GameObject {
 		this.posX = posX;
 		this.posY = posY;
 		this.size = s;
-		Escenario.matriz[posY/size][posX/size] = ID;
+		Escenario.matriz[posX][posY] = ID;
 	}
 	
 	public abstract void paint(Graphics2D g2d);
@@ -25,7 +25,7 @@ public abstract class GameObject {
 	public void setPosition(int posX, int posY, int ID) {
 		this.posX = posX;
 		this.posY = posY;
-		Escenario.matriz[this.posY/this.size][this.posX/this.size] = ID;
+		Escenario.matriz[this.posX][this.posY] = ID;
 	}
 
 	public int getSize() {
@@ -55,7 +55,7 @@ public abstract class GameObject {
 	}
 	
 	public Rectangle getBound() {
-		return new Rectangle(posX, posY, size, size);
+		return new Rectangle(posX*size, posY*size, size, size);
 	}
 	
 	public boolean esColicionado(GameObject obj) {	
