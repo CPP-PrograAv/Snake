@@ -7,7 +7,6 @@ public abstract class GameObject {
 	
 	private int posX,posY;
 	private int size;
-	public static int idgeneral = 0;
 	
 	public GameObject(int s) {
 		this.size=s;
@@ -63,6 +62,9 @@ public abstract class GameObject {
 		return getBound().intersects(obj.getBound());
 	}
 
+	public GameObject obtenerObjPos() {
+		return this;
+	}
 	
 	
 }

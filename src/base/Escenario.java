@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 
@@ -19,11 +21,16 @@ public class Escenario extends JFrame{
 	private static int size = 20;
 	Snake snake = new Snake(size,80,80);
 	Item item = new Item(size);
+	
+	
+	ArrayList<Integer> ListaMuertos = new ArrayList<Integer>();
+	
+	
 	Snake snake2 = new Snake(size,200,200);
 	public static int matriz[][] = new int[ANCHO/size][LARGO/size];
 	
 	//movimientos
-	int dy,dx;
+	int dy,dx; 
 	boolean up,down,left,right=true;
 	
 	public Escenario() {
@@ -70,8 +77,8 @@ public class Escenario extends JFrame{
 		while (true) {
 //			mostrarmatriz();
 //			System.out.println("\n\n");
-//
 //			snake.move(size,0); //la muevo
+			
 			move();
 			
 			update( this.getGraphics() );//re pinto la snake, preguntar por repaint();
@@ -83,7 +90,7 @@ public class Escenario extends JFrame{
 		}
 	}
 
-	private void mostrarmatriz() {
+	public static void mostrarmatriz() {
 		// TODO Auto-generated method stub
 		for(int i=0; i<ANCHO/size; i++) {
 			for(int j=0; j<ANCHO/size;j++) 
@@ -140,14 +147,12 @@ public class Escenario extends JFrame{
 			item.setItem();
 			snake.crecer();
 		}
-		
-	
-							
+								
 		//PASAR LOS LIMITES
-		if(snake.getPosX()==20) snake.setPosX(ANCHO-40);
-		if(snake.getPosY()==20) snake.setPosY(LARGO-20);
-		if(snake.getPosX()==ANCHO-20) snake.setPosX(20);
-		if(snake.getPosY()==LARGO-20) snake.setPosY(40);
+//		if(snake.getPosX()==20) snake.setPosX(ANCHO-40);
+//		if(snake.getPosY()==20) snake.setPosY(LARGO-20);
+//		if(snake.getPosX()==ANCHO-20) snake.setPosX(20);
+//		if(snake.getPosY()==LARGO-20) snake.setPosY(40);
 		
 	}
 	
